@@ -10,6 +10,7 @@ import java.util.List;
 public class OutputView {
     private static final String PURCHASE_COUNT_OUTPUT_MESSAGE = "%d개를 구매했습니다.";
     private static final String WINNING_STATISTICS_HEADER = "\n당첨 통계\n---";
+    private static final String WINNING_STATISTICS_FORMAT = "%s (%,d원) - %d개%n";
     private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.1f%%입니다.";
 
     public void printPurchaseResult(int count) {
@@ -30,7 +31,7 @@ public class OutputView {
         for (Rank rank : Rank.values()) {
             if (rank.isWinning()) {
                 int count = statistics.getCountByRank(rank);
-                System.out.printf("%s (%,d원) - %d개%n",
+                System.out.printf(WINNING_STATISTICS_FORMAT,
                         rank.getDescription(),
                         rank.getPrize(),
                         count
