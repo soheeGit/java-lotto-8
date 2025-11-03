@@ -21,6 +21,7 @@ public class OutputView {
             List<Integer> numbers = lotto.getNumbers();
             System.out.println(numbers);
         }
+        System.out.println();
     }
 
     public void printWinningStatistics(WinningStatistics statistics) {

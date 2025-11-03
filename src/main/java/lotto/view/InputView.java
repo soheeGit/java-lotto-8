@@ -13,12 +13,14 @@ public class InputView {
     public int readPurchaseAmount() {
         System.out.println(PURCHASE_AMOUNT_INPUT_MESSAGE);
         String input = Console.readLine();
+        System.out.println();
         return LottoParser.from(input);
     }
 
     public List<Integer> readWinningNumbers() {
         System.out.println(WINNING_NUMBERS_INPUT_MESSAGE);
         String input = Console.readLine();
+        System.out.println();
         return LottoParser.parseWinningNumbers(input);
     }
 
