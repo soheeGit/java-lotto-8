@@ -156,7 +156,7 @@ class WinningLottoTest {
         Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(winningNumbers, 7);
 
-        Lotto result = winningLotto.getWinningNumbers();
+        Lotto result = winningLotto.winningNumbers();
 
         assertThat(result).isEqualTo(winningNumbers);
     }
@@ -169,7 +169,7 @@ class WinningLottoTest {
                 7
         );
 
-        int bonusNumber = winningLotto.getBonusNumber();
+        int bonusNumber = winningLotto.bonusNumber();
 
         assertThat(bonusNumber).isEqualTo(7);
     }

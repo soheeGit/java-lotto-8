@@ -1,5 +1,6 @@
 package lotto.validator;
 
+import lotto.domain.Lotto;
 import lotto.exception.ErrorMessage;
 
 import java.util.HashSet;
@@ -31,6 +32,24 @@ public class LottoValidator {
     public static void validateNumberRange(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANGE);
+        }
+    }
+
+    public static void validateBonusRange(int bonusNumber) {
+        if (bonusNumber < MIN_NUMBER || bonusNumber > MAX_NUMBER) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_BONUS_LOTTO_RANGE);
+        }
+    }
+
+    public static void validateBonusDuplicate(Lotto winningNumbers, int bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_BONUS_LOTTO_DUPLICATE);
+        }
+    }
+
+    public static void validateNotEmpty(String input) {
+        if (input == null || input.isBlank()) {
+            throw new IllegalArgumentException(ErrorMessage.EMPTY_INPUT);
         }
     }
 }

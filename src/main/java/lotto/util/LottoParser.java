@@ -14,7 +14,7 @@ public class LottoParser {
     }
 
     public static List<Integer> parseWinningNumbers(String input) {
-        validateNotEmpty(input);
+        LottoValidator.validateNotEmpty(input);
 
         String[] tokens = input.split(DELIMITER);
         List<Integer> numbers = Arrays.stream(tokens)
@@ -30,7 +30,7 @@ public class LottoParser {
     }
 
     public static int parseBonusNumber(String input) {
-        validateNotEmpty(input);
+        LottoValidator.validateNotEmpty(input);
         int number = parseToInt(input.trim());
         LottoValidator.validateNumberRange(number);
         return number;
@@ -41,12 +41,6 @@ public class LottoParser {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER_FORMAT);
-        }
-    }
-
-    private static void validateNotEmpty(String input) {
-        if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException(ErrorMessage.EMPTY_INPUT);
         }
     }
 }
