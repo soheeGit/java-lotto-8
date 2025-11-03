@@ -35,24 +35,41 @@ public class LottoController {
     }
 
     private WinningLotto readWinningLotto() {
+        Lotto winningNumbers = readWinningNumbers();
+        int bonusNumber = readBonusNumber();
+        return createWinningLotto(winningNumbers, bonusNumber);
+    }
+
+    private Lotto readWinningNumbers() {
         while (true) {
             try {
-                Lotto winningNumbers = readWinningNumbers();
-                int bonusNumber = readBonusNumber();
-                return new WinningLotto(winningNumbers, bonusNumber);
+                List<Integer> numbers = inputView.readWinningNumbers();
+                return new Lotto(numbers);
             } catch (IllegalArgumentException e) {
                 outputView.printError(e.getMessage());
             }
         }
     }
 
-    private Lotto readWinningNumbers() {
-        List<Integer> numbers = inputView.readWinningNumbers();
-        return new Lotto(numbers);
+    private int readBonusNumber() {
+        while (true) {
+            try {
+                return inputView.readBonusNumber();
+            } catch (IllegalArgumentException e) {
+                outputView.printError(e.getMessage());
+            }
+        }
     }
 
-    private int readBonusNumber() {
-        return inputView.readBonusNumber();
+    private WinningLotto createWinningLotto(Lotto winningNumbers, int bonusNumber) {
+        while (true) {
+            try {
+                return new WinningLotto(winningNumbers, bonusNumber);
+            } catch (IllegalArgumentException e) {
+                outputView.printError(e.getMessage());
+                bonusNumber = readBonusNumber();
+            }
+        }
     }
 
     private Money readMoney() {
