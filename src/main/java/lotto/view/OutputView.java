@@ -17,7 +17,7 @@ public class OutputView {
     }
 
     public void printLottos(LottoTickets tickets) {
-        for (Lotto lotto : tickets.getLottos()) {
+        for (Lotto lotto : tickets.lottos()) {
             List<Integer> numbers = lotto.getNumbers();
             System.out.println(numbers);
         }

@@ -22,7 +22,7 @@ public class WinningStatistics {
     }
 
     private void calculateStatistics(LottoTickets lottoTickets, WinningLotto winningLotto) {
-        for (Lotto lotto : lottoTickets.getLottos()) {
+        for (Lotto lotto : lottoTickets.lottos()) {
             Rank rank = winningLotto.match(lotto);
             if (rank.isWinning()) {
                 rankCounts.put(rank, rankCounts.get(rank) + 1);
@@ -46,7 +46,7 @@ public class WinningStatistics {
 
     public double calculateProfitRate(Money purchaseAmount) {
         double totalPrize = getTotalPrize();
-        double rate = (totalPrize / purchaseAmount.getAmount()) * 100;
+        double rate = (totalPrize / purchaseAmount.amount()) * 100;
         return Math.round(rate * 10) / 10.0;
     }
 }

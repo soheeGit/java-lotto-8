@@ -18,6 +18,6 @@ public class LottoTicketsTest {
 
         LottoTickets tickets = new LottoTickets(lottos);
 
-        assertThat(tickets.getLottos()).hasSize(2);
+        assertThat(tickets.lottos()).hasSize(2);
     }
 }

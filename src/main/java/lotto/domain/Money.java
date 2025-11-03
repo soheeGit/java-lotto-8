@@ -2,22 +2,15 @@ package lotto.domain;
 
 import lotto.validator.MoneyValidator;
 
-public class Money {
+public record Money(int amount) {
     private static final int LOTTO_PRICE = 1000;
 
-    private final int amount;
-
-    public Money(int amount) {
+    public Money {
         MoneyValidator.validatePositive(amount);
         MoneyValidator.validateUnit(amount);
-        this.amount = amount;
     }
 
     public int getLottoCount() {
         return amount / LOTTO_PRICE;
-    }
-
-    public int getAmount() {
-        return amount;
     }
 }
