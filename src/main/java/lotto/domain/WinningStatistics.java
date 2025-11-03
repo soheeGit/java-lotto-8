@@ -4,6 +4,9 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class WinningStatistics {
+    private static final int PERCENTAGE = 100;
+    private static final int DECIMAL_SCALE = 10;
+
     private final Map<Rank, Integer> rankCounts;
 
     public WinningStatistics(LottoTickets lottoTickets, WinningLotto winningLotto) {
@@ -46,7 +49,7 @@ public class WinningStatistics {
 
     public double calculateProfitRate(Money purchaseAmount) {
         double totalPrize = getTotalPrize();
-        double rate = (totalPrize / purchaseAmount.amount()) * 100;
-        return Math.round(rate * 10) / 10.0;
+        double rate = (totalPrize / purchaseAmount.amount()) * PERCENTAGE;
+        return Math.round(rate * DECIMAL_SCALE) / (double) DECIMAL_SCALE;
     }
 }
