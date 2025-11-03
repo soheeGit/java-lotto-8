@@ -12,7 +12,7 @@ class RankTest {
     @Test
     @DisplayName("6개 일치하면 1등이다")
     void matchSixNumbers() {
-        Rank rank = Rank.valueOf(6, false);
+        Rank rank = Rank.from(6, false);
 
         assertThat(rank).isEqualTo(Rank.FIRST);
     }
@@ -20,7 +20,7 @@ class RankTest {
     @Test
     @DisplayName("5개 일치하고 보너스가 일치하면 2등이다")
     void matchFiveNumbersWithBonus() {
-        Rank rank = Rank.valueOf(5, true);
+        Rank rank = Rank.from(5, true);
 
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
@@ -28,7 +28,7 @@ class RankTest {
     @Test
     @DisplayName("5개 일치하고 보너스가 불일치하면 3등이다")
     void matchFiveNumbersWithoutBonus() {
-        Rank rank = Rank.valueOf(5, false);
+        Rank rank = Rank.from(5, false);
 
         assertThat(rank).isEqualTo(Rank.THIRD);
     }
@@ -36,7 +36,7 @@ class RankTest {
     @Test
     @DisplayName("4개 일치하면 4등이다")
     void matchFourNumbers() {
-        Rank rank = Rank.valueOf(4, false);
+        Rank rank = Rank.from(4, false);
 
         assertThat(rank).isEqualTo(Rank.FOURTH);
     }
@@ -44,7 +44,7 @@ class RankTest {
     @Test
     @DisplayName("3개 일치하면 5등이다")
     void matchThreeNumbers() {
-        Rank rank = Rank.valueOf(3, false);
+        Rank rank = Rank.from(3, false);
 
         assertThat(rank).isEqualTo(Rank.FIFTH);
     }
@@ -53,7 +53,7 @@ class RankTest {
     @CsvSource({"0, false", "1, false", "2, false", "0, true", "1, true", "2, true"})
     @DisplayName("3개 미만 일치하면 낙첨이다")
     void matchLessThanThree(int matchCount, boolean bonusMatch) {
-        Rank rank = Rank.valueOf(matchCount, bonusMatch);
+        Rank rank = Rank.from(matchCount, bonusMatch);
 
         assertThat(rank).isEqualTo(Rank.MISS);
     }
@@ -61,8 +61,8 @@ class RankTest {
     @Test
     @DisplayName("6개 일치시 보너스는 영향을 주지 않는다")
     void matchSixNumbersIgnoresBonus() {
-        Rank rankWithBonus = Rank.valueOf(6, true);
-        Rank rankWithoutBonus = Rank.valueOf(6, false);
+        Rank rankWithBonus = Rank.from(6, true);
+        Rank rankWithoutBonus = Rank.from(6, false);
 
         assertThat(rankWithBonus).isEqualTo(Rank.FIRST);
         assertThat(rankWithoutBonus).isEqualTo(Rank.FIRST);
@@ -72,8 +72,8 @@ class RankTest {
     @Test
     @DisplayName("4개 이하 일치시 보너스는 영향을 주지 않는다")
     void matchFourOrLessIgnoresBonus() {
-        Rank fourWithBonus = Rank.valueOf(4, true);
-        Rank fourWithoutBonus = Rank.valueOf(4, false);
+        Rank fourWithBonus = Rank.from(4, true);
+        Rank fourWithoutBonus = Rank.from(4, false);
 
         assertThat(fourWithBonus).isEqualTo(Rank.FOURTH);
         assertThat(fourWithoutBonus).isEqualTo(Rank.FOURTH);
@@ -152,7 +152,7 @@ class RankTest {
     })
     @DisplayName("각 등수의 설명을 반환한다")
     void getDescription(int matchCount, boolean bonusMatch, String expectedDescription) {
-        Rank rank = Rank.valueOf(matchCount, bonusMatch);
+        Rank rank = Rank.from(matchCount, bonusMatch);
 
         String description = rank.getDescription();
 
@@ -210,7 +210,7 @@ class RankTest {
     })
     @DisplayName("유효하지 않은 일치 개수는 낙첨으로 처리된다")
     void invalidMatchCountReturnsMiss(int matchCount, boolean bonusMatch) {
-        Rank rank = Rank.valueOf(matchCount, bonusMatch);
+        Rank rank = Rank.from(matchCount, bonusMatch);
 
         assertThat(rank).isEqualTo(Rank.MISS);
     }

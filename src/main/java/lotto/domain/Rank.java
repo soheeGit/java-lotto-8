@@ -34,7 +34,7 @@ public enum Rank {
         return this != MISS;
     }
 
-    public static Rank valueOf(int matchCount, boolean bonusMatch) {
+    public static Rank from(int matchCount, boolean bonusMatch) {
         if (matchCount == 6) {
             return FIRST;
         }
