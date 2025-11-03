@@ -27,4 +27,10 @@ public class LottoValidator {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_DUPLICATE);
         }
     }
+
+    public static void validateNumberRange(int number) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANGE);
+        }
+    }
 }

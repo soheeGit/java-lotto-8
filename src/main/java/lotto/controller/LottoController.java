@@ -18,17 +18,41 @@ public class LottoController {
     }
 
     public void run() {
-        // 1. 구입 금액 입력
         Money money = readMoney();
 
-        // 2. 로또 생성
         int count = money.getLottoCount();
         List<Lotto> lottos = LottoGenerator.generateMultiple(count);
         LottoTickets tickets = new LottoTickets(lottos);
 
-        // 3. 출력
         outputView.printPurchaseResult(count);
         outputView.printLottos(tickets);
+
+        WinningLotto winningLotto = readWinningLotto();
+        WinningStatistics statistics = new WinningStatistics(tickets, winningLotto);
+
+        outputView.printWinningStatistics(statistics);
+        outputView.printProfitRate(statistics.calculateProfitRate(money));
+    }
+
+    private WinningLotto readWinningLotto() {
+        while (true) {
+            try {
+                Lotto winningNumbers = readWinningNumbers();
+                int bonusNumber = readBonusNumber();
+                return new WinningLotto(winningNumbers, bonusNumber);
+            } catch (IllegalArgumentException e) {
+                outputView.printError(e.getMessage());
+            }
+        }
+    }
+
+    private Lotto readWinningNumbers() {
+        List<Integer> numbers = inputView.readWinningNumbers();
+        return new Lotto(numbers);
+    }
+
+    private int readBonusNumber() {
+        return inputView.readBonusNumber();
     }
 
     private Money readMoney() {
